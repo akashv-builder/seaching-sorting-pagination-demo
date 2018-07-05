@@ -1,0 +1,38 @@
+<header>
+  <nav class="navbar navbar-default">
+    <a class="navbar-brand" href="#">Ma Games</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="row">
+    <nav class="navbar">
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter">      
+    </nav>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name
+          </th>
+          <th>Genre
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let game of games | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+          <td>{{i}}</td>
+          <td>{{game.name}}</td>
+          <td>{{game.genre}}</td>
+        </tr>
+      </tbody>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </table>
+  </div>
+</div>
+<div class="text-center">
+    <button type="button" class="btn btn-primary" (click)="sortbyname('name')">Sort by name</button>
+    <button type="button" class="btn btn-primary" (click)="sortbygenre('genre')">Sort by genre</button>
+    <button type="button" class="btn btn-primary" (click)="sortbynamedesc('name')">Sort by name desc</button>
+    <button type="button" class="btn btn-primary" (click)="sortbygenredesc('genre')">Sort by genre desc</button>
+</div>
